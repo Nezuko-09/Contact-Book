@@ -15,6 +15,7 @@ public class Menu
             while (!int.TryParse(Console.ReadLine(), out option))
             {
                 Console.WriteLine("invalid input please try again");
+                option = int.Parse(Console.ReadLine()!);
 
             }
             switch (option)
