@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices.Marshalling;
+
 public class Contact
 {
     public string desktopPath;
@@ -15,7 +17,7 @@ public class Contact
         {
             writer.WriteLine(contactDetails.ToString());
         }
-        return "contacts has been created successfully. yay!!".ToUpper();
+        return $"contacts has been created successfully. yay!!".ToUpper();
     }
     public void ReadContacts()
     {
@@ -34,6 +36,17 @@ public class Contact
         {
             Console.WriteLine(contact);
         }
+    }
+    public bool Checker(string name)
+    {
+        string fileName = Path.Combine(folderPath, "Contacts.txt");
+        List<string> contacts = File.ReadAllLines(fileName).ToList();
+        var exist = contacts.Find(v => v.StartsWith(name + ","));
+        if (exist == null)
+        {
+            Console.WriteLine("contact name doesnt exist");
+        }
+        return true;
     }
     public void UpdateContact(string oldname,ContactDetails contactDetails)
     {
@@ -54,13 +67,9 @@ public class Contact
                 writer.WriteLine(contact);
                 }
             }
-            
+             Console.WriteLine("contacts has been updated successfully"); 
         }
-        else
-        {
-            Console.WriteLine("contact doesnt exist");
-        }
-
+       
     }
     public void DeleteContact(string name)
     {
@@ -81,11 +90,11 @@ public class Contact
                 writer.WriteLine(contact);
                 }
             }
-            
+          Console.WriteLine("contacts has been deleted successfully");  
         }
         else
         {
-            Console.WriteLine("this contact doesnt exist".ToUpper());
+            Console.WriteLine("this contact name doesnt exist".ToUpper());
            
         }
     }

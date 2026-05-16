@@ -53,6 +53,11 @@ public class Menu
                     ContactDetails contactDetails1 = new();
                     Console.WriteLine("howdy!! please input the contact name you want to edit");
                     string name = Console.ReadLine()!.ToLower();
+                    if(contact.Checker(name) == true)
+                    {
+                        continue;
+                    }
+                    else{
                     Console.WriteLine("please provide the following info");
                     Console.Write("New Name:");
                     contactDetails1.Name = Console.ReadLine()!;
@@ -71,13 +76,12 @@ public class Menu
                     }
                     contactDetails1.PhoneNo = phone;
                     contact.UpdateContact(name, contactDetails1);
-                    Console.WriteLine("contacts has been updated successfully");
+                    }
                     break;
                 case 4:
                     Console.WriteLine("input the name of contact you want to delete");
                     string answer = Console.ReadLine()!.ToLower();
                     contact.DeleteContact(answer);
-                    Console.WriteLine("contacts has been deleted successfully");
                     break;
                 case 5:
                     run = false;
